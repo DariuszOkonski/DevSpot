@@ -1,0 +1,29 @@
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vscode/
+.idea/
+# OS
+.DS_Store
+Thumbs.db
+
+# npm
+node_modules/
+
+# Logs
+logs/
+*.log
+
+# Local secrets
+appsettings.Development.json
+local.settings.json
+
+# Rider
+.idea/
+
+# Visual Studio Code workspace
+*.code-workspace
