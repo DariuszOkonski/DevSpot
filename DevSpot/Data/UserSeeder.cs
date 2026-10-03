@@ -1,4 +1,4 @@
-﻿using DevSpot.Constants
+﻿using DevSpot.Constants;
 
 using Microsoft.AspNetCore.Identity;
 
