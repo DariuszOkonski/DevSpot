@@ -1,3 +1,4 @@
+using DevSpot.Constants;
 using DevSpot.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +43,11 @@ namespace DevSpot
                 var services = scope.ServiceProvider;
                 var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
+                if (!roleManager.RoleExistsAsync(Roles.Admin).Result)
+                {
+                    var result = roleManager.CreateAsync(new IdentityRole(Roles.Admin)).Result;
+
+                }
             }
 
             app.UseHttpsRedirection();
