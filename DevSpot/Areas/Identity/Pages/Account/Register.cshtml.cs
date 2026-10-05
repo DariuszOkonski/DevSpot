@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
+using DevSpot.Constants;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -116,6 +117,15 @@ namespace DevSpot.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    if (Input.IsJobSeeker)
+                    {
+                        await _userManager.AddToRoleAsync(user, Roles.JobSeeker);
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, Roles.Employer);
+                    }
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
