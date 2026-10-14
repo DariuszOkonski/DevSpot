@@ -59,7 +59,7 @@ namespace DevSpot
             app.MapStaticAssets();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=JobPostingsController}/{action=Index}/{id?}")
+                pattern: "{controller=JobPostings}/{action=Index}/{id?}")
                 .WithStaticAssets();
 
             app.Run();
