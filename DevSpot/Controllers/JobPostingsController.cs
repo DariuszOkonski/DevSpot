@@ -18,7 +18,7 @@ namespace DevSpot.Controllers
             _userManager = userManager;
         }
 
-
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             IEnumerable<JobPosting> jobPostings = await _repository.GetAllAsync();
@@ -26,9 +26,16 @@ namespace DevSpot.Controllers
             return View(jobPostings);
         }
 
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(JobPosting jobPosting)
+        {
+            return RedirectToAction(nameof(Index));
         }
     }
 }
