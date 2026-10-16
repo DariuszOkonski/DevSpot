@@ -35,6 +35,15 @@ namespace DevSpot.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(JobPosting jobPosting)
         {
+            ModelState.Remove("User");
+            ModelState.Remove("UserId");
+
+            if (ModelState.IsValid)
+            {
+                await _repository.AddAsync(jobPosting);
+            }
+
+
             return RedirectToAction(nameof(Index));
         }
     }
