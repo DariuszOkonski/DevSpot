@@ -52,10 +52,11 @@ namespace DevSpot.Controllers
                 };
 
                 await _repository.AddAsync(jobPosting);
+                return RedirectToAction(nameof(Index));
             }
 
 
-            return RedirectToAction(nameof(Index));
+            return View(jobPostingVm);
         }
     }
 }
