@@ -1,11 +1,13 @@
 ﻿using DevSpot.Models;
 using DevSpot.Repositories;
 using DevSpot.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevSpot.Controllers
 {
+    [Authorize]
     public class JobPostingsController : Controller
     {
         private readonly IRepository<JobPosting> _repository;
@@ -19,6 +21,7 @@ namespace DevSpot.Controllers
             _userManager = userManager;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -27,6 +30,7 @@ namespace DevSpot.Controllers
             return View(jobPostings);
         }
 
+        [Authorize(Roles = "Admin,Employer")]
         [HttpGet]
         public IActionResult Create()
         {
@@ -36,8 +40,6 @@ namespace DevSpot.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(JobPostingViewModel jobPostingVm)
         {
-            //ModelState.Remove("User");
-            //ModelState.Remove("UserId");
 
             if (ModelState.IsValid)
             {
