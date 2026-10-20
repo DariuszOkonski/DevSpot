@@ -60,5 +60,12 @@ namespace DevSpot.Controllers
 
             return View(jobPostingVm);
         }
+
+        [HttpDelete]
+        [Authorize(Roles = "Admin,Employer")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            return Ok();
+        }
     }
 }
