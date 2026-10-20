@@ -9,7 +9,7 @@
 <div class="list-group">
     @foreach(var jobPosting in Model)
     {
-        <div class="list-group-item">
+        <div class="list-group-item" id="job-posting-@jobPosting.Id">
             <h3>@jobPosting.Title</h3>
             <p>@jobPosting.Description</p>
             <p><strong>Company: </strong>@jobPosting.Company</p>
@@ -36,7 +36,7 @@
                     url: "@Url.Action("Delete", "JobPostings")/" + id,
                     type: "delete",
                     success: function(result) {
-
+                        $("#job-posting-" + id).remove();
                     },
                     error: function(err){
                         alert("An error occured.")
