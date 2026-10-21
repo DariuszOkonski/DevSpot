@@ -26,7 +26,17 @@ namespace DevSpot.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            IEnumerable<JobPosting> jobPostings = await _repository.GetAllAsync();
+            if (User.IsInRole(Roles.Employer))
+            {
+                IEnumerable<JobPosting> allJobPostings = await _repository.GetAllAsync();
+
+                var userId = _userManager.GetUserId(User);
+                var filteredJobPostings = allJobPostings.Where(jp => jp.UserId == userId);
+
+                return View(filteredJobPostings);
+            }
+
+            var jobPostings = await _repository.GetAllAsync();
 
             return View(jobPostings);
         }
